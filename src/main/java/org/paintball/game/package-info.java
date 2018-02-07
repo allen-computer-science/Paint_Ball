@@ -1,5 +1,5 @@
 /**
- * 
+ * This package will contain mode specific code;
  */
 /**
  * @author deepd
