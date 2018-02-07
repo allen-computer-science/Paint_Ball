@@ -23,7 +23,9 @@ public class Window
 		games = new ArrayList<GameInterface>();
 		frame = new JFrame(title);
 
+		frame.setMinimumSize(dim);
 		frame.setPreferredSize(dim);
+		frame.setMaximumSize(dim);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);

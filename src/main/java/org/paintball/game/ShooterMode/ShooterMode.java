@@ -1,4 +1,4 @@
-package main.java.org.paintball.game;
+package main.java.org.paintball.game.ShooterMode;
 
 import java.awt.Graphics;
 

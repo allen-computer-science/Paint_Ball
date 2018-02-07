@@ -12,9 +12,9 @@ public class GameEngine implements Runnable
 	private final Thread gameLoopThread;
 	private final Timer timer;
 	
-	public GameEngine(String title, int width, int height, GameInterface game) {
+	public GameEngine(String title, int width, int height) {
 		gameLoopThread = new Thread(this, "Primary_Thread");
-		Dimension dim = new Dimension(width, height);
+		Dimension dim = new Dimension(height, width);
 		window = new Window(title, dim);
 		timer = new Timer();
 	}
@@ -42,6 +42,7 @@ public class GameEngine implements Runnable
 	
 	protected void init() {
 		timer.init();
+		window.setVisible();
 	}
 	
 	protected void gameLoop() {
@@ -59,28 +60,32 @@ public class GameEngine implements Runnable
 				accumulator -= interval;
 			}
 			
-			render();
+			paint();
 			sync();
 		}
 		
-		private void sync() {
-			float loopSlot = 1f / TARGET_FPS;
-			double endTime = timer.getLastLoopTime();
-			while(timer.getTime() < endTime) {
-				try {
-					Thread.sleep(1);
-				} catch(Exception e) {
-					e.printStackTrace();
-				}
+	}
+
+	private void sync()
+	{
+		float loopSlot = 1f / TARGET_FPS;
+		double endTime = timer.getLastLoopTime() - loopSlot;
+		while(timer.getTime() < endTime) {
+			try {
+				Thread.sleep(1);
+			} catch(Exception e) {
+				e.printStackTrace();
 			}
 		}
-		
-		protected void update() {
-			window.update();
-		}
-		
-		protected void render() {
-			window.render();
-		}
+	}
+
+	private void paint()
+	{
+		window.paint();	
+	}
+	
+	private void update()
+	{
+		window.update();
 	}
 }
