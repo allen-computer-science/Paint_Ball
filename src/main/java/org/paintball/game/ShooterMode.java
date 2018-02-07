@@ -1,8 +1,32 @@
 package main.java.org.paintball.game;
 
+import java.awt.Graphics;
+
 import main.java.org.paintball.engine.GameInterface;
 
-public class ShooterMode implements GameInterface
+@SuppressWarnings("serial")
+public class ShooterMode extends GameInterface
 {
+
+	@Override
+	public void init()
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void update()
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void paint(Graphics g)
+	{
+		// TODO Auto-generated method stub
+		
+	}
 
 }
