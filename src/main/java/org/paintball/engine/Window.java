@@ -2,30 +2,47 @@ package main.java.org.paintball.engine;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
 public class Window
 {
+	private String title;
 	private Dimension dim;
-	private JFrame frame;
+	public static JFrame frame;
 
 	private ArrayList<GameInterface> games;
 
-	private String title;
-
-	public Window(String title, Dimension dim)
+	static GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
+	
+	private static boolean fullScreen;
+	
+	private KeyHandler keyHandler;
+	
+	public Window(String title)
 	{
 		this.title = title;
-		this.dim = dim;
 
 		games = new ArrayList<GameInterface>();
 		frame = new JFrame(title);
-
-		frame.setMinimumSize(dim);
-		frame.setPreferredSize(dim);
-		frame.setMaximumSize(dim);
+		
+		keyHandler = new KeyHandler();
+		
+		frame.addKeyListener(keyHandler);
+		
+		if(device.isFullScreenSupported()) {
+			frame.setUndecorated(true);
+			fullScreen = true;
+		}
+		else {
+			System.err.println("Full screen not supported");
+			fullScreen = false;
+	        frame.setSize(1000 / 12 * 9, 1000); // just something to let you see the window
+		}
+		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
@@ -35,12 +52,20 @@ public class Window
 		games.add(game);
 	}
 
-	public void setVisible() {
-		frame.setVisible(true);
+	public static void showFrame() {
+		if(fullScreen) {
+			device.setFullScreenWindow(frame);
+		}else {
+			frame.setVisible(true);
+		}
 	}
 	
-	public void hideFrame() {
-		frame.setVisible(false);
+	public static void hideFrame() {
+		if(fullScreen) {
+			device.setFullScreenWindow(null);
+		}else {
+			frame.setVisible(false);
+		}
 	}
 	
 	public Dimension getDim()

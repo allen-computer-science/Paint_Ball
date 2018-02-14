@@ -12,10 +12,9 @@ public class GameEngine implements Runnable
 	private final Thread gameLoopThread;
 	private final Timer timer;
 	
-	public GameEngine(String title, int width, int height) {
+	public GameEngine(String title) {
 		gameLoopThread = new Thread(this, "Primary_Thread");
-		Dimension dim = new Dimension(height, width);
-		window = new Window(title, dim);
+		window = new Window(title);
 		timer = new Timer();
 	}
 
@@ -42,7 +41,7 @@ public class GameEngine implements Runnable
 	
 	protected void init() {
 		timer.init();
-		window.setVisible();
+		Window.showFrame();
 	}
 	
 	protected void gameLoop() {
