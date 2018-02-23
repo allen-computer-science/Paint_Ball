@@ -116,7 +116,7 @@ public class Window
 	
 	public void paint() {
 		currentGame.paint(currentGame.getGraphics());
-		currentGame.dispose();
+		currentGame.show();
 	}
 	
 	public void update() {
