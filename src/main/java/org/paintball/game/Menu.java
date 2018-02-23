@@ -1,11 +1,16 @@
 package main.java.org.paintball.game;
 
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.awt.GraphicsEnvironment;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import main.java.org.paintball.engine.GameInterface;
 
-public class Menu extends GameInterface
+public class Menu extends GameInterface implements MouseListener
 {
 	@Override
 	public void init()
@@ -31,9 +36,46 @@ public class Menu extends GameInterface
 	@Override
 	public void paint(Graphics g)
 	{
-		g.create();
 		g.setColor(Color.black);
-		g.fillRect(40, 40, 200, 200);
+		System.out.println(getWidth() * getHeight() / 10000);
+		g.setFont(new Font("Centaur", Font.PLAIN, getWidth() * getHeight() / 10000));
+		g.drawString("Paintball", (getWidth() / 2) - (g.getFontMetrics().stringWidth("Paintball") / 2), (getHeight() / 4) - (g.getFontMetrics().getHeight() / 2));
+		
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent arg0)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0)
+	{
+		// TODO Auto-generated method stub
+		
 	}
 
 }

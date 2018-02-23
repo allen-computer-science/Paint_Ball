@@ -40,6 +40,8 @@ public class Window
 		contentPane = new JPanel();
 		currentGame = new Menu();
 		
+		contentPane.setFocusable(false);
+		
 		if(device.isFullScreenSupported()) {
 			frame.setUndecorated(true);
 			fullScreen = true;
@@ -47,19 +49,20 @@ public class Window
 			currentGame.setSize(device.getDefaultConfiguration().getBounds().width, device.getDefaultConfiguration().getBounds().height);
 		}
 		else {
-			System.err.println("Full screen not supported");
+			System.out.println("Full screen not supported");
 			fullScreen = false;
 	        frame.setSize(1000 / 12 * 9, 1000); // just something to let you see the window
-	        contentPane.setSize(1000 / 12 * 9, 1000);
-	        currentGame.setSize(1000 / 12 * 9, 1000);
+	        contentPane.setSize(1000 / 12 * 7
+	        		, 1000);
+	        currentGame.setSize(1000 / 12 * 7, 1000);
 		}		
 		
 		contentPane.add(currentGame);
-		System.out.println("Game Canvas - " + currentGame.getBounds().getHeight() + " : " + currentGame.getBounds().getWidth());
-		System.out.println("Content Pane - " + contentPane.getBounds().getHeight() + " : " + contentPane.getBounds().getWidth());
-		
-		contentPane.setFocusable(true);
-		contentPane.addKeyListener(keyHandler);
+		//System.out.println("Game Canvas - " + currentGame.getBounds().getHeight() + " : " + currentGame.getBounds().getWidth());
+		//System.out.println("Content Pane - " + contentPane.getBounds().getHeight() + " : " + contentPane.getBounds().getWidth());
+
+		currentGame.setFocusable(true);
+		currentGame.addKeyListener(keyHandler);
 		
 		frame.setContentPane(contentPane);
 		
@@ -71,15 +74,18 @@ public class Window
 	
 	public void changeGameMode(GameInterface game) {
 		currentGame = game.deepCopy();
-		frame.add(currentGame);
+		contentPane.removeAll();
+		contentPane.add(currentGame);
+		currentGame.setFocusable(true);
+		currentGame.setSize(device.getDefaultConfiguration().getBounds().width, device.getDefaultConfiguration().getBounds().height);
+		currentGame.addKeyListener(keyHandler);
 	}
 
 	public static void showFrame() {
 		frame.setVisible(true);
 		if(fullScreen) {
 			device.setFullScreenWindow(frame);
-			System.out.println("Frame - " + frame.getSize().getHeight() + " : " + frame.getSize().getWidth());
-			frame.pack();
+			//System.out.println("Frame - " + frame.getSize().getHeight() + " : " + frame.getSize().getWidth());
 		}
 	}
 	
