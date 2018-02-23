@@ -1,15 +1,19 @@
 package main.java.org.paintball.engine;
 
 import java.awt.Dimension;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferStrategy;
+
+import main.java.org.paintball.BombMode.BombMode;
 
 public class GameEngine implements Runnable
 {
 	private static final int TARGET_FPS = 75;
 	private static final int TARGET_UPS = 30;
+	private static boolean running;
 	
 	private final Window window;
-	private final Thread gameLoopThread;
+	private static Thread gameLoopThread;
 	private final Timer timer;
 	
 	public GameEngine(String title) {
@@ -18,13 +22,25 @@ public class GameEngine implements Runnable
 		timer = new Timer();
 	}
 
-	public void start() {
+	public static void start() {
 		String osName = System.getProperty("os.name");
+		running = true;
 		if(osName.contains("Mac")) {
 			gameLoopThread.run();
 		}
 		else {
 			gameLoopThread.start();
+		}
+	}
+	
+	public static void stop() {
+		try {
+			Window.hideFrame();
+			running = false;
+			gameLoopThread.join();
+			Window.frame.dispatchEvent(new WindowEvent(Window.frame, WindowEvent.WINDOW_CLOSING));
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
 	}
 	
@@ -49,7 +65,6 @@ public class GameEngine implements Runnable
 		float accumulator = 0f;
 		float interval = 1f / TARGET_UPS;
 		
-		boolean running = true;
 		while(running) {
 			elapsedTime = timer.elapsedTime();
 			accumulator += elapsedTime;

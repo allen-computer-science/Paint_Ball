@@ -7,7 +7,8 @@ public class Main
 
 	public static void main(String[] args)
 	{
-		new GameEngine("Paint_Ball").start();;
+		new GameEngine("Paint_Ball");
+		GameEngine.start();
 	}
 
 }

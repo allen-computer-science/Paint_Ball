@@ -11,6 +11,8 @@ public abstract class GameInterface extends Canvas
 	
 	public abstract void init();
 	
+	public abstract GameInterface deepCopy();
+	
 	public abstract void update();
 	
 	public abstract void paint(Graphics g);
@@ -19,9 +21,12 @@ public abstract class GameInterface extends Canvas
 		bs = this.getBufferStrategy();
 		if(bs == null) {
 			this.createBufferStrategy(3);
-			return null;
+			bs = this.getBufferStrategy();
 		}
-		
 		return bs.getDrawGraphics();
+	}
+	
+	public void show() {
+		bs.show();
 	}
 }

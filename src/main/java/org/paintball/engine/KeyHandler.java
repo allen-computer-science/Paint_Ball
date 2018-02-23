@@ -12,8 +12,7 @@ public class KeyHandler extends KeyAdapter
 		int key = e.getKeyCode();
 		
 		if(key == KeyEvent.VK_ESCAPE) {
-			Window.hideFrame();
-			Window.frame.dispatchEvent(new WindowEvent(Window.frame, WindowEvent.WINDOW_CLOSING));
+			GameEngine.stop();
 		}
 	}
 }

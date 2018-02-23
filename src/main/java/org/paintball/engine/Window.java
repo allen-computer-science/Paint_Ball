@@ -1,5 +1,8 @@
 package main.java.org.paintball.engine;
 
+import java.awt.Canvas;
+import java.awt.Component;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GraphicsDevice;
@@ -7,14 +10,19 @@ import java.awt.GraphicsEnvironment;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+import main.java.org.paintball.BombMode.BombMode;
+import main.java.org.paintball.game.Menu;
 
 public class Window
 {
 	private String title;
 	private Dimension dim;
 	public static JFrame frame;
+	private static JPanel contentPane;
 
-	private ArrayList<GameInterface> games;
+	private static GameInterface currentGame;
 
 	static GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
 	
@@ -26,45 +34,59 @@ public class Window
 	{
 		this.title = title;
 
-		games = new ArrayList<GameInterface>();
 		frame = new JFrame(title);
 		
 		keyHandler = new KeyHandler();
-		
-		frame.addKeyListener(keyHandler);
+		contentPane = new JPanel();
+		currentGame = new Menu();
 		
 		if(device.isFullScreenSupported()) {
 			frame.setUndecorated(true);
 			fullScreen = true;
+			contentPane.setSize(device.getDefaultConfiguration().getBounds().width, device.getDefaultConfiguration().getBounds().height);
+			currentGame.setSize(device.getDefaultConfiguration().getBounds().width, device.getDefaultConfiguration().getBounds().height);
 		}
 		else {
 			System.err.println("Full screen not supported");
 			fullScreen = false;
 	        frame.setSize(1000 / 12 * 9, 1000); // just something to let you see the window
-		}
+	        contentPane.setSize(1000 / 12 * 9, 1000);
+	        currentGame.setSize(1000 / 12 * 9, 1000);
+		}		
+		
+		contentPane.add(currentGame);
+		System.out.println("Game Canvas - " + currentGame.getBounds().getHeight() + " : " + currentGame.getBounds().getWidth());
+		System.out.println("Content Pane - " + contentPane.getBounds().getHeight() + " : " + contentPane.getBounds().getWidth());
+		
+		contentPane.setFocusable(true);
+		contentPane.addKeyListener(keyHandler);
+		
+		frame.setContentPane(contentPane);
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
+		frame.setFocusable(false);
 	}
 	
-	public void addGame(GameInterface game) {
-		games.add(game);
+	public void changeGameMode(GameInterface game) {
+		currentGame = game.deepCopy();
+		frame.add(currentGame);
 	}
 
 	public static void showFrame() {
+		frame.setVisible(true);
 		if(fullScreen) {
 			device.setFullScreenWindow(frame);
-		}else {
-			frame.setVisible(true);
+			System.out.println("Frame - " + frame.getSize().getHeight() + " : " + frame.getSize().getWidth());
+			frame.pack();
 		}
 	}
 	
 	public static void hideFrame() {
+		frame.setVisible(false);
 		if(fullScreen) {
 			device.setFullScreenWindow(null);
-		}else {
-			frame.setVisible(false);
 		}
 	}
 	
@@ -89,20 +111,15 @@ public class Window
 	}
 	
 	public void init() {
-		for(int i = 0; i < games.size(); i++) {
-			games.get(i).init();
-		}
+		currentGame.init();
 	}
 	
 	public void paint() {
-		for(int i = 0; i < games.size(); i++) {
-			games.get(i).paint(games.get(i).getGraphics());
-		}
+		currentGame.paint(currentGame.getGraphics());
+		currentGame.dispose();
 	}
 	
 	public void update() {
-		for(int i = 0; i < games.size(); i++) {
-			games.get(i).update();
-		}
+		currentGame.update();
 	}
 }

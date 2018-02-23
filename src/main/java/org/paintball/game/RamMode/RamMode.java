@@ -1,4 +1,4 @@
-package main.java.org.paintball.game.ramMode;
+package main.java.org.paintball.game.RamMode;
 
 import java.awt.Graphics;
 
@@ -27,6 +27,13 @@ public class RamMode extends GameInterface
 	{
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public GameInterface deepCopy()
+	{
+		// TODO Auto-generated method stub
+		return new RamMode();
 	}
 
 }
