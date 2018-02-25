@@ -1,6 +1,8 @@
 package main.java.org.paintball.engine;
 
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GraphicsEnvironment;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferStrategy;
 
@@ -17,6 +19,9 @@ public class GameEngine implements Runnable
 	private final Timer timer;
 	
 	public GameEngine(String title) {
+		for(Font f : GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts()) {
+			System.out.println(f);
+		}
 		gameLoopThread = new Thread(this, "Primary_Thread");
 		window = new Window(title);
 		timer = new Timer();
