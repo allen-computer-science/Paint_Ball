@@ -62,7 +62,7 @@ public class LoadingScreen extends GameInterface implements MouseListener
 	public GameInterface deepCopy()
 	{
 		// TODO Auto-generated method stub
-		return null;
+		return new LoadingScreen();
 	}
 
 	@Override

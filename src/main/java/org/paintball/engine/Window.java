@@ -12,8 +12,8 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import main.java.org.paintball.BombMode.BombMode;
 import main.java.org.paintball.game.Menu;
+import main.java.org.paintball.game.BombMode.BombMode;
 
 public class Window
 {
@@ -30,8 +30,7 @@ public class Window
 	
 	private KeyHandler keyHandler;
 	
-	public Window(String title)
-	{
+	public Window(String title){
 		this.title = title;
 
 		frame = new JFrame(title);
@@ -45,6 +44,7 @@ public class Window
 		if(device.isFullScreenSupported()) {
 			frame.setUndecorated(true);
 			fullScreen = true;
+			frame.setSize(device.getDefaultConfiguration().getBounds().width, device.getDefaultConfiguration().getBounds().height);
 			contentPane.setSize(device.getDefaultConfiguration().getBounds().width, device.getDefaultConfiguration().getBounds().height);
 			currentGame.setSize(device.getDefaultConfiguration().getBounds().width, device.getDefaultConfiguration().getBounds().height);
 		}
@@ -58,8 +58,8 @@ public class Window
 		}		
 		
 		contentPane.add(currentGame);
-		//System.out.println("Game Canvas - " + currentGame.getBounds().getHeight() + " : " + currentGame.getBounds().getWidth());
-		//System.out.println("Content Pane - " + contentPane.getBounds().getHeight() + " : " + contentPane.getBounds().getWidth());
+		System.out.println("Game Canvas - " + currentGame.getBounds().getHeight() + " : " + currentGame.getBounds().getWidth());
+		System.out.println("Content Pane - " + contentPane.getBounds().getHeight() + " : " + contentPane.getBounds().getWidth());
 
 		currentGame.setFocusable(true);
 		currentGame.addKeyListener(keyHandler);
@@ -96,23 +96,19 @@ public class Window
 		}
 	}
 	
-	public Dimension getDim()
-	{
+	public Dimension getDim(){
 		return dim;
 	}
 	
-	public String getTitle()
-	{
+	public String getTitle(){
 		return title;
 	}
 
-	public void setDim(Dimension dim)
-	{
+	public void setDim(Dimension dim){
 		this.dim = dim;
 	}
 
-	public void setTitle(String title)
-	{
+	public void setTitle(String title){
 		this.title = title;
 	}
 	

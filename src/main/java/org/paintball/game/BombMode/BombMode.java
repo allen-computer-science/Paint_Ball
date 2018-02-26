@@ -1,4 +1,4 @@
-package main.java.org.paintball.BombMode;
+package main.java.org.paintball.game.BombMode;
 
 import java.awt.Color;
 import java.awt.Graphics;
