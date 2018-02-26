@@ -5,14 +5,14 @@ package main.java.org.paintball.engine;
 
 public class Timer
 {
-	public double lastLoopTime;
-	
+
+	private double lastLoopTime;
 	public void init() {
 		lastLoopTime = getTime();
 	}
 	
 	public double getTime() {
-		return System.nanoTime() / 1000000000.0; // 1,000,000,000 nanoseconds = 1 second
+		return System.nanoTime() / 1_000_000_000.0; // 1,000,000,000 nanoseconds = 1 second
 	}
 	
 	public float elapsedTime() {

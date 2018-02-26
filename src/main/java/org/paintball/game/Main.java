@@ -1,12 +1,14 @@
 package main.java.org.paintball.game;
 
+import main.java.org.paintball.engine.GameEngine;
+
 public class Main
 {
 
 	public static void main(String[] args)
 	{
-		// TODO Auto-generated method stub
-
+		new GameEngine("Paint_Ball");
+		GameEngine.start();
 	}
 
 }
