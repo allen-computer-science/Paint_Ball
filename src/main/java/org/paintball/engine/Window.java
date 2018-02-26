@@ -30,8 +30,7 @@ public class Window
 	
 	private KeyHandler keyHandler;
 	
-	public Window(String title)
-	{
+	public Window(String title){
 		this.title = title;
 
 		frame = new JFrame(title);
@@ -96,23 +95,19 @@ public class Window
 		}
 	}
 	
-	public Dimension getDim()
-	{
+	public Dimension getDim(){
 		return dim;
 	}
 	
-	public String getTitle()
-	{
+	public String getTitle(){
 		return title;
 	}
 
-	public void setDim(Dimension dim)
-	{
+	public void setDim(Dimension dim){
 		this.dim = dim;
 	}
 
-	public void setTitle(String title)
-	{
+	public void setTitle(String title){
 		this.title = title;
 	}
 	

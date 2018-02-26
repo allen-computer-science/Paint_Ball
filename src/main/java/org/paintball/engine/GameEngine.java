@@ -19,9 +19,9 @@ public class GameEngine implements Runnable
 	private final Timer timer;
 	
 	public GameEngine(String title) {
-		for(Font f : GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts()) {
-			System.out.println(f);
-		}
+		//for(Font f : GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts()) {
+			//System.out.println(f);
+		//}
 		gameLoopThread = new Thread(this, "Primary_Thread");
 		window = new Window(title);
 		timer = new Timer();
