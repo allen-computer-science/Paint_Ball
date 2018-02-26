@@ -44,6 +44,7 @@ public class Window
 		if(device.isFullScreenSupported()) {
 			frame.setUndecorated(true);
 			fullScreen = true;
+			frame.setSize(device.getDefaultConfiguration().getBounds().width, device.getDefaultConfiguration().getBounds().height);
 			contentPane.setSize(device.getDefaultConfiguration().getBounds().width, device.getDefaultConfiguration().getBounds().height);
 			currentGame.setSize(device.getDefaultConfiguration().getBounds().width, device.getDefaultConfiguration().getBounds().height);
 		}
@@ -57,8 +58,8 @@ public class Window
 		}		
 		
 		contentPane.add(currentGame);
-		//System.out.println("Game Canvas - " + currentGame.getBounds().getHeight() + " : " + currentGame.getBounds().getWidth());
-		//System.out.println("Content Pane - " + contentPane.getBounds().getHeight() + " : " + contentPane.getBounds().getWidth());
+		System.out.println("Game Canvas - " + currentGame.getBounds().getHeight() + " : " + currentGame.getBounds().getWidth());
+		System.out.println("Content Pane - " + contentPane.getBounds().getHeight() + " : " + contentPane.getBounds().getWidth());
 
 		currentGame.setFocusable(true);
 		currentGame.addKeyListener(keyHandler);
