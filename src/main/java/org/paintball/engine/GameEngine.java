@@ -6,7 +6,7 @@ import java.awt.GraphicsEnvironment;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferStrategy;
 
-import main.java.org.paintball.BombMode.BombMode;
+import main.java.org.paintball.game.BombMode.BombMode;
 
 public class GameEngine implements Runnable
 {

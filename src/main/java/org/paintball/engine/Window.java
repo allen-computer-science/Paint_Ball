@@ -12,8 +12,8 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import main.java.org.paintball.BombMode.BombMode;
 import main.java.org.paintball.game.Menu;
+import main.java.org.paintball.game.BombMode.BombMode;
 
 public class Window
 {
