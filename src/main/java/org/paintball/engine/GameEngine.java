@@ -62,6 +62,7 @@ public class GameEngine implements Runnable
 	
 	protected void init() {
 		timer.init();
+		window.init();
 		Window.showFrame();
 	}
 	

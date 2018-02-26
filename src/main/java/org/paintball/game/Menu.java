@@ -28,7 +28,7 @@ public class Menu extends GameInterface implements MouseListener
 	public GameInterface deepCopy()
 	{
 		// TODO Auto-generated method stub
-		return null;
+		return new Menu();
 	}
 
 	@Override
