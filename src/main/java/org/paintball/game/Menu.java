@@ -56,13 +56,7 @@ public class Menu extends GameInterface implements MouseListener
 				getWidth()/2 - g.getFontMetrics().stringWidth("RAM MODE") / 2, 
 				getHeight() * 2/6);
 		//g.drawLine(0, getHeight() * 2/6, getWidth(), getHeight() * 2/6);
-		if(!options.containsKey("RAM MODE")) {
-		options.put("RAM MODE", new Rectangle(
-				(getWidth() / 2) - (g.getFontMetrics().stringWidth("RAM MODE") * 3 / 4), 
-				(getHeight() * 2 / 6) - (g.getFontMetrics().getAscent() * 4 / 3), 
-				g.getFontMetrics().stringWidth("RAM MODE") * 6 / 4, 
-				g.getFontMetrics().getHeight() * 4 / 3));
-		}
+		
 		g.drawRect(
 				(getWidth() / 2) - (g.getFontMetrics().stringWidth("RAM MODE") * 3 / 4), 
 				(getHeight() * 2 / 6) - (g.getFontMetrics().getAscent() * 4 / 3), 
@@ -75,13 +69,7 @@ public class Menu extends GameInterface implements MouseListener
 				getWidth() / 2 - g.getFontMetrics().stringWidth("SHOOTER MODE") / 2, 
 				getHeight() * 3 / 6);
 		//g.drawLine(0, getHeight() * 3/6, getWidth(), getHeight() * 3/6);
-		if(!options.containsKey("SHOOTER MODE")) {
-		options.put("SHOOTER MODE", new Rectangle(
-				(getWidth() / 2) - g.getFontMetrics().stringWidth("SHOOTER MODE") * 3 / 4, 
-				(getHeight() * 3 / 6) - (g.getFontMetrics().getAscent() * 4 / 3), 
-				g.getFontMetrics().stringWidth("SHOOTER MODE") * 6 / 4, 
-				g.getFontMetrics().getHeight() * 4 / 3));
-		}
+		
 		g.drawRect(
 				(getWidth() / 2) - g.getFontMetrics().stringWidth("SHOOTER MODE") * 3 / 4, 
 				(getHeight() * 3 / 6) - (g.getFontMetrics().getAscent() * 4 / 3), 
@@ -95,18 +83,12 @@ public class Menu extends GameInterface implements MouseListener
 				getWidth()/2 - g.getFontMetrics().stringWidth("BOMB MODE") / 2, 
 				getHeight() * 4/6);
 		//g.drawLine(0, getHeight() * 4/6, getWidth(), getHeight() * 4/6);
-		if(!options.containsKey("BOMB MODE")) {
-		options.put("BOMB MODE", new Rectangle(
-				(getWidth() / 2) - g.getFontMetrics().stringWidth("BOMB MODE") * 3 / 4, 
-				(getHeight() * 4 / 6) - (g.getFontMetrics().getAscent() * 4 / 3), 
-				g.getFontMetrics().stringWidth("BOMB MODE") * 6 / 4, 
-				g.getFontMetrics().getHeight() * 4 / 3));
+		
 		g.drawRect(
 				(getWidth() / 2) - g.getFontMetrics().stringWidth("BOMB MODE") * 3 / 4, 
 				(getHeight() * 4 / 6) - (g.getFontMetrics().getAscent() * 4 / 3), 
 				g.getFontMetrics().stringWidth("BOMB MODE") * 6 / 4, 
 				g.getFontMetrics().getHeight() * 4 / 3);
-		}
 		//endRegion
 		
 		//region [End]
@@ -114,13 +96,7 @@ public class Menu extends GameInterface implements MouseListener
 				getWidth() / 2 - g.getFontMetrics().stringWidth("EXIT") / 2, 
 				getHeight() * 5 / 6);
 		//g.drawLine(0, getHeight() * 5/6, getWidth(), getHeight() * 5/6);
-		if(!options.containsKey("EXIT")) {
-		options.put("EXIT", new Rectangle(
-				(getWidth() / 2) - g.getFontMetrics().stringWidth("EXIT") * 3 / 4, 
-				(getHeight() * 5 / 6) - (g.getFontMetrics().getAscent() * 4 / 3), 
-				g.getFontMetrics().stringWidth("EXIT") * 6 / 4, 
-				g.getFontMetrics().getHeight() * 4 / 3));
-		}
+		
 		g.drawRect(
 				(getWidth() / 2) - g.getFontMetrics().stringWidth("EXIT") * 3 / 4, 
 				(getHeight() * 5 / 6) - (g.getFontMetrics().getAscent() * 4 / 3), 
@@ -132,6 +108,7 @@ public class Menu extends GameInterface implements MouseListener
 	@Override
 	public void mouseClicked(MouseEvent arg0)
 	{
+		
 		if(options.get("SHOOTER MODE").contains(arg0.getPoint())) {
 			
 		}else if(options.get("RAM MODE").contains(arg0.getPoint())) {
