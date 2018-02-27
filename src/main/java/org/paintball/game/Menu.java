@@ -4,16 +4,20 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GraphicsEnvironment;
+import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 import main.java.org.paintball.engine.GameEngine;
 import main.java.org.paintball.engine.GameInterface;
+import main.java.org.paintball.engine.Window;
+import main.java.org.paintball.game.BombMode.*;
+import main.java.org.paintball.game.RamMode.*;
+import main.java.org.paintball.game.ShooterMode.*;
 
 public class Menu extends GameInterface implements MouseListener
 {
@@ -22,6 +26,18 @@ public class Menu extends GameInterface implements MouseListener
 	private Rectangle BombMode;
 	private Rectangle Exit;
 	
+	private Menu(Rectangle RamMode, Rectangle ShooterMode, Rectangle BombMode, Rectangle Exit) {
+		this.RamMode = RamMode;
+		this.ShooterMode = ShooterMode;
+		this.BombMode = BombMode;
+		this.Exit = Exit;
+	}
+	
+	public Menu()
+	{
+		
+	}
+
 	@Override
 	public void init()
 	{
@@ -31,8 +47,7 @@ public class Menu extends GameInterface implements MouseListener
 	@Override
 	public GameInterface deepCopy()
 	{
-		// TODO Auto-generated method stub
-		return new Menu();
+		return new Menu(this.RamMode, this.ShooterMode, this.BombMode, this.Exit);
 	}
 
 	@Override
@@ -45,7 +60,7 @@ public class Menu extends GameInterface implements MouseListener
 	@Override
 	public void paint(Graphics g)
 	{
-
+		Point mousePoint = MouseInfo.getPointerInfo().getLocation();
 		g.setColor(Color.black);
 		g.setFont(new Font("Centaur", Font.PLAIN, getWidth() * getHeight() / 10000));
 		
@@ -70,6 +85,18 @@ public class Menu extends GameInterface implements MouseListener
 				(getHeight() * 2 / 6) - (g.getFontMetrics().getAscent() * 4 / 3), 
 				g.getFontMetrics().stringWidth("RAM MODE") * 6 / 4, 
 				g.getFontMetrics().getHeight() * 4 / 3);
+		if(RamMode.contains(mousePoint)) {
+			g.drawRect(
+					(getWidth() / 2) - (g.getFontMetrics().stringWidth("RAM MODE") * 3 / 4), 
+					(getHeight() * 2 / 6) - (g.getFontMetrics().getAscent() * 4 / 3), 
+					(g.getFontMetrics().stringWidth("RAM MODE") * 6 / 4) + 1, 
+					(g.getFontMetrics().getHeight() * 4 / 3) + 1);
+			g.drawRect(
+					(getWidth() / 2) - (g.getFontMetrics().stringWidth("RAM MODE") * 3 / 4), 
+					(getHeight() * 2 / 6) - (g.getFontMetrics().getAscent() * 4 / 3), 
+					(g.getFontMetrics().stringWidth("RAM MODE") * 6 / 4) + 2, 
+					(g.getFontMetrics().getHeight() * 4 / 3) + 2);
+		}
 		//endRegion
 		
 		//region [Shooter Mode]
@@ -87,6 +114,18 @@ public class Menu extends GameInterface implements MouseListener
 				(getHeight() * 3 / 6) - (g.getFontMetrics().getAscent() * 4 / 3), 
 				g.getFontMetrics().stringWidth("SHOOTER MODE") * 6 / 4, 
 				g.getFontMetrics().getHeight() * 4 / 3);
+		if(ShooterMode.contains(mousePoint)) {
+			g.drawRect(
+					(getWidth() / 2) - (g.getFontMetrics().stringWidth("SHOOTER MODE") * 3 / 4), 
+					(getHeight() * 3 / 6) - (g.getFontMetrics().getAscent() * 4 / 3), 
+					(g.getFontMetrics().stringWidth("SHOOTER MODE") * 6 / 4) + 1, 
+					(g.getFontMetrics().getHeight() * 4 / 3) + 1);
+			g.drawRect(
+					(getWidth() / 2) - (g.getFontMetrics().stringWidth("SHOOTER MODE") * 3 / 4), 
+					(getHeight() * 3 / 6) - (g.getFontMetrics().getAscent() * 4 / 3), 
+					(g.getFontMetrics().stringWidth("SHOOTER MODE") * 6 / 4) + 2, 
+					(g.getFontMetrics().getHeight() * 4 / 3) + 2);
+		}
 		//endRegion
 		
 		//region [Bomb Mode]
@@ -105,6 +144,18 @@ public class Menu extends GameInterface implements MouseListener
 				(getHeight() * 4 / 6) - (g.getFontMetrics().getAscent() * 4 / 3), 
 				g.getFontMetrics().stringWidth("BOMB MODE") * 6 / 4, 
 				g.getFontMetrics().getHeight() * 4 / 3);
+		if(BombMode.contains(mousePoint)) {
+			g.drawRect(
+					(getWidth() / 2) - (g.getFontMetrics().stringWidth("BOMB MODE") * 3 / 4), 
+					(getHeight() * 4 / 6) - (g.getFontMetrics().getAscent() * 4 / 3), 
+					(g.getFontMetrics().stringWidth("BOMB MODE") * 6 / 4) + 1, 
+					(g.getFontMetrics().getHeight() * 4 / 3) + 1);
+			g.drawRect(
+					(getWidth() / 2) - (g.getFontMetrics().stringWidth("BOMB MODE") * 3 / 4), 
+					(getHeight() * 4 / 6) - (g.getFontMetrics().getAscent() * 4 / 3), 
+					(g.getFontMetrics().stringWidth("BOMB MODE") * 6 / 4) + 2, 
+					(g.getFontMetrics().getHeight() * 4 / 3) + 2);
+		}
 		//endRegion
 		
 		//region [End]
@@ -122,12 +173,20 @@ public class Menu extends GameInterface implements MouseListener
 				(getHeight() * 5 / 6) - (g.getFontMetrics().getAscent() * 4 / 3), 
 				g.getFontMetrics().stringWidth("EXIT") * 6 / 4, 
 				g.getFontMetrics().getHeight() * 4 / 3);
+		if(Exit.contains(mousePoint)) {
+			g.drawRect(
+					(getWidth() / 2) - (g.getFontMetrics().stringWidth("EXIT") * 3 / 4), 
+					(getHeight() * 5 / 6) - (g.getFontMetrics().getAscent() * 4 / 3), 
+					(g.getFontMetrics().stringWidth("EXIT") * 6 / 4) + 1, 
+					(g.getFontMetrics().getHeight() * 4 / 3) + 1);
+			g.drawRect(
+					(getWidth() / 2) - (g.getFontMetrics().stringWidth("EXIT") * 3 / 4), 
+					(getHeight() * 5 / 6) - (g.getFontMetrics().getAscent() * 4 / 3), 
+					(g.getFontMetrics().stringWidth("EXIT") * 6 / 4) + 2, 
+					(g.getFontMetrics().getHeight() * 4 / 3) + 2);
+		}
 		//endRegion
-	}
-
-	private boolean contains(int x, int y, int width, int height, Point p) {
-		Rectangle box = new Rectangle(x, y, width, height);
-		return box.contains(p);
+		g.dispose();
 	}
 	
 	@Override
@@ -135,11 +194,11 @@ public class Menu extends GameInterface implements MouseListener
 	{
 		
 		if(RamMode.contains(arg0.getPoint())){
-			
+			Window.changeGameMode(new RamMode());
 		}else if(ShooterMode.contains(arg0.getPoint())) {
-			
+			Window.changeGameMode(new ShooterMode());
 		}else if(BombMode.contains(arg0.getPoint())) {
-			
+			Window.changeGameMode(new BombMode());
 		}else if(Exit.contains(arg0.getPoint())) {
 			System.out.println("Exit clicked");
 			GameEngine.stop();

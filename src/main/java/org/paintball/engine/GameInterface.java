@@ -1,6 +1,7 @@
 package main.java.org.paintball.engine;
 
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
@@ -16,6 +17,14 @@ public abstract class GameInterface extends Canvas
 	public abstract void update();
 	
 	public abstract void paint(Graphics g);
+	
+	public void render(Graphics g) {
+		g.setColor(Color.WHITE);
+		g.fillRect(0, 0, Window.windowDim.width, Window.windowDim.height);
+		paint(g);
+		g.dispose();
+		show();
+	}
 	
 	public Graphics getGraphics() {
 		bs = this.getBufferStrategy();
