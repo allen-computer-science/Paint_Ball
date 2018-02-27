@@ -18,7 +18,7 @@ import main.java.org.paintball.game.BombMode.BombMode;
 public class Window
 {
 	private String title;
-	private Dimension dim;
+	public static Dimension windowDim;
 	public static JFrame frame;
 	private static JPanel contentPane;
 
@@ -28,18 +28,17 @@ public class Window
 	
 	private static boolean fullScreen;
 	
-	private KeyHandler keyHandler;
+	private static KeyHandler keyHandler;
 	
 	public Window(String title){
 		this.title = title;
-
+		
 		frame = new JFrame(title);
+		windowDim = new Dimension(device.getDefaultConfiguration().getBounds().width, device.getDefaultConfiguration().getBounds().height);
 		
 		keyHandler = new KeyHandler();
 		contentPane = new JPanel();
 		currentGame = new Menu();
-		
-		contentPane.setFocusable(false);
 		
 		if(device.isFullScreenSupported()) {
 			frame.setUndecorated(true);
@@ -58,8 +57,8 @@ public class Window
 		}		
 		
 		contentPane.add(currentGame);
-		System.out.println("Game Canvas - " + currentGame.getBounds().getHeight() + " : " + currentGame.getBounds().getWidth());
-		System.out.println("Content Pane - " + contentPane.getBounds().getHeight() + " : " + contentPane.getBounds().getWidth());
+		//System.out.println("Game Canvas - " + currentGame.getBounds().getHeight() + " : " + currentGame.getBounds().getWidth());
+		//System.out.println("Content Pane - " + contentPane.getBounds().getHeight() + " : " + contentPane.getBounds().getWidth());
 
 		currentGame.setFocusable(true);
 		currentGame.addKeyListener(keyHandler);
@@ -69,16 +68,17 @@ public class Window
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
-		frame.setFocusable(false);
+		currentGame.requestFocus();
 	}
 	
-	public void changeGameMode(GameInterface game) {
+	public static void changeGameMode(GameInterface game) {
 		currentGame = game.deepCopy();
 		contentPane.removeAll();
 		contentPane.add(currentGame);
-		currentGame.setFocusable(true);
 		currentGame.setSize(device.getDefaultConfiguration().getBounds().width, device.getDefaultConfiguration().getBounds().height);
 		currentGame.addKeyListener(keyHandler);
+		currentGame.setFocusable(true);
+		currentGame.requestFocus();
 	}
 
 	public static void showFrame() {
@@ -97,7 +97,7 @@ public class Window
 	}
 	
 	public Dimension getDim(){
-		return dim;
+		return windowDim;
 	}
 	
 	public String getTitle(){
@@ -105,7 +105,7 @@ public class Window
 	}
 
 	public void setDim(Dimension dim){
-		this.dim = dim;
+		this.windowDim = dim;
 	}
 
 	public void setTitle(String title){
@@ -117,8 +117,7 @@ public class Window
 	}
 	
 	public void paint() {
-		currentGame.paint(currentGame.getGraphics());
-		currentGame.show();
+		currentGame.render(currentGame.getGraphics());;
 	}
 	
 	public void update() {
